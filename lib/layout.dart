@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:web_first_project/widget/large_screen.dart';
 
 class SiteLayOut extends StatelessWidget {
   const SiteLayOut({super.key});
@@ -8,23 +9,9 @@ class SiteLayOut extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.white,
       ),
-      body: Row(
-        children: [
-          Expanded(
-            child: Container(
-              color: Colors.red,
-            ),
-          ),
-          Expanded(
-            flex: 5,
-            child: Container(
-              color: Colors.blue,
-            ),
-          )
-        ],
-      ),
+      body: const LargeScreen(),
     );
   }
 }
