@@ -6,10 +6,18 @@ const int smallScreenSize = 360;
 const int customScreenSize = 1100;
 
 class ResponsiveWidget extends StatelessWidget {
-  const ResponsiveWidget({Key? key}) : super(key: key);
+  final Widget largeScreen;
+  final Widget? mediumScreen;
+  final Widget? smallScreen;
+  const ResponsiveWidget(
+      {Key? key,
+      required this.largeScreen,
+      this.mediumScreen,
+      this.smallScreen})
+      : super(key: key);
 
   static bool isSmallScreen(BuildContext context) =>
-      MediaQuery.of(context).size.width < smallScreenSize;
+      MediaQuery.of(context).size.width < mediumScreenSize;
 
   static bool isMediumScreen(BuildContext context) =>
       MediaQuery.of(context).size.width >= mediumScreenSize &&
@@ -24,6 +32,16 @@ class ResponsiveWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return LayoutBuilder(builder: (ctx, constraints) {
+      double width = constraints.maxWidth;
+
+      if (width >= largeScreenSize) {
+        return largeScreen;
+      } else if (width < largeScreenSize && width >= mediumScreenSize) {
+        return mediumScreen ?? largeScreen;
+      } else {
+        return smallScreen ?? largeScreen;
+      }
+    });
   }
 }
